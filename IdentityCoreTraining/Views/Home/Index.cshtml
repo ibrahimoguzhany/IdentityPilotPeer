@@ -2,5 +2,22 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="row">
+        <div>
+            <h4 class="text-center">Pilot Peer Support Programme</h4>
+        </div>
+        <div>
+            <img src="~/lib/Pictures/sunexpress.png" />
+        </div>
+    </div>
+</div>
 
-<h2>Index</h2>
+
+<div class="row">
+    <a class="btn btn-info col-md-6" asp-action="INeedSupport" asp-controller="Home">I need support</a>
+
+    <a class="btn btn-info col-md-6" asp-action="Login" asp-controller="Home">Peer / Coordinator login</a>
+</div>
+
+

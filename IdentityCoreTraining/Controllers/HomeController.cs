@@ -1,33 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IdentityCoreTraining.Models;
-using IdentityCoreTraining.ViewModels;
+using IdentityCoreTraining.Models.Entities;
+using IdentityCoreTraining.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using IdentityCoreTraining.Models.Context;
+using IdentityCoreTraining.Models.Enums;
+using Mapster;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace IdentityCoreTraining.Controllers
 {
 
-
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public UserManager<AppUser> _userManager;
-        private SignInManager<AppUser> _signInManager;
-
-        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RequestContext context) : base(
+            userManager, signInManager, context, null)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
         }
 
+
         public IActionResult Index()
+
         {
-            if(User.Identity.IsAuthenticated)
+
+            if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Pilot");
+                //return RedirectToAction("Index", "Member");
             }
             return View();
         }
@@ -35,7 +39,7 @@ namespace IdentityCoreTraining.Controllers
         public IActionResult Login(string returnUrl)
         {
             TempData["ReturnUrl"] = returnUrl;
-            
+
             return View();
         }
 
@@ -54,28 +58,31 @@ namespace IdentityCoreTraining.Controllers
                     if (result.Succeeded)
                     {
                         if (TempData["ReturnUrl"] != null)
-                        {
                             return Redirect(TempData["ReturnUrl"].ToString());
-                        }
-                        return RedirectToAction("Index", "Pilot");
+                        
+                        if (await _userManager.IsInRoleAsync(user, "Admin"))
+                            return RedirectToAction("Index", "Admin");
+
+                        else if (await _userManager.IsInRoleAsync(user, "Peer"))
+                            return RedirectToAction("Index" ,"Peer");
+                        
+                        else if (await _userManager.IsInRoleAsync(user, "Coordinator"))
+                            return RedirectToAction("Index", "Coordinator");
+                        
+                        else if (await _userManager.IsInRoleAsync(user, "Member"))
+                            return RedirectToAction("Index", "Member");
                     }
                 }
                 else
                 {
                     ModelState.AddModelError("", "Gecersiz email veya sifresi");
                 }
-
             }
-
             return View(loginViewModel);
         }
 
-        
-
-        [HttpGet]
         public IActionResult SignUp()
         {
-
             return View();
         }
 
@@ -97,22 +104,52 @@ namespace IdentityCoreTraining.Controllers
                 }
                 else
                 {
-                    foreach (IdentityError error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
+                    AddModelError(result);
                 }
             }
 
             return View(userViewModel);
         }
 
-    
-        public IActionResult SigIn(UserViewModel userViewModel)
+        public IActionResult INeedSupport()
         {
-
             return View();
         }
+
+        [HttpPost]
+        public IActionResult INeedSupport(SupportRequestViewModel supportRequestViewModel)
+        {
+
+            SupportRequest request = new SupportRequest();
+            
+
+            request.BaseInformation = supportRequestViewModel.BaseInformation;
+            request.Email = supportRequestViewModel.Email;
+            request.HowSoonWantsToBeContacted = supportRequestViewModel.HowSoonWantsToBeContacted;
+            request.LanguagePreferency = supportRequestViewModel.LanguagePreferency;
+            request.Name = supportRequestViewModel.Name;
+            request.PhoneNumber = supportRequestViewModel.PhoneNumber;
+            request.Status = supportRequestViewModel.Status;
+            request.PeerNote = supportRequestViewModel.PeerNote;
+
+
+            _context.SupportRequests.Add(request);
+            _context.SupportRequests.Attach(request);
+            _context.Entry(request).State = EntityState.Added;
+            int result = _context.SaveChanges();
+
+            if (result > 0)
+            {
+                ViewBag.success = "Form Gonderildi";
+                return RedirectToAction("Index", "Home");
+            }
+            return View(supportRequestViewModel);
+
+        }
+
+
+
+
 
     }
 }

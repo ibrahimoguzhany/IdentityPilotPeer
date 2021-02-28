@@ -8,11 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityCoreTraining.Models;
+using IdentityCoreTraining.Models.Context;
+using IdentityCoreTraining.Models.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
 namespace IdentityCoreTraining
 {
     public class Startup
@@ -34,11 +35,13 @@ namespace IdentityCoreTraining
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnectionString"])
 
                 );
+            services.AddDbContext<RequestContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
 
             CookieBuilder cookieBuilder = new CookieBuilder();
 
-            cookieBuilder.Name = "MySite";
+            cookieBuilder.Name = "PeerPilotSupportProgramme";
             cookieBuilder.HttpOnly = true;
             cookieBuilder.SameSite = SameSiteMode.Lax;// CSRF onlemek icin Strict yapmalisin.
             cookieBuilder.SecurePolicy = CookieSecurePolicy.SameAsRequest; // Always dersem browser sadece https uzerinden istek geldiyse requestte kullanici bilgisini sunucuya gonderiyor.
@@ -46,10 +49,11 @@ namespace IdentityCoreTraining
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = new PathString("/Home/Login");
-                options.LogoutPath = new PathString("/Pilot/Logout");
+                options.LogoutPath = new PathString("/Member/Logout");
                 options.Cookie = cookieBuilder;
-                options.ExpireTimeSpan = TimeSpan.FromDays(60);
-                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+                options.SlidingExpiration = true; 
+                options.AccessDeniedPath = new PathString("/Member/AccessDenied");// sayfaya erisim izni olmayan kullanicilarin gidecegi path
             });
 
 
@@ -81,7 +85,7 @@ namespace IdentityCoreTraining
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

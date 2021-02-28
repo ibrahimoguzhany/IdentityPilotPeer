@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav mr-auto">
+
+                @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Peer"))
+                {
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-action="Index" asp-controller="Peer">Peer Main Page <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-action="Index" asp-controller="Home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-action="Logout" asp-controller="Member">Çıkış Yap</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-action="ChangePassword" asp-controller="Member">
+                            Sifre degistirme
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-action="EditUser" asp-controller="Member">Bilgi guncelleme</a>
+                    </li>
+
+                }
+            </ul>
+        </div>
+
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto" asp-action="Index" asp-controller="Home">PilotPeerProgramme.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Welcome @this.User.Identity.Name!</a>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+    </nav>
+
+    <div class="container">
+
+        <div>
+            @RenderBody()
+
+        </div>
+
+
+    </div>
+</body>
+</html>

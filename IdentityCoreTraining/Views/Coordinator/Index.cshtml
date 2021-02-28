@@ -1,0 +1,50 @@
+﻿@model List<SupportRequest>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Coordinator/_CoordinatorLayout.cshtml";
+}
+
+<h3 class="text-center">Support Requests</h3>
+<div class="row">
+    <div>
+        <form asp-action="EditRequest" method="post">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Request Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Peer Note</th>
+                    <th>Assigned Peer Id</th>
+                    <th>Status</th>
+                    <th>Base Information</th>
+                    <th>Language Preferency</th>
+                    <th>How Soon Wants to Be Contacted</th>
+                    <th>Edit</th>
+
+                </tr>
+                @foreach (var item in Model)
+                {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.PhoneNumber</td>
+                <td>@item.PeerNote</td>
+                <td>@item.UserId</td>
+                <td>@item.Status</td>
+                <td>@item.BaseInformation</td>
+                <td>@item.LanguagePreferency</td>
+                <td>@item.HowSoonWantsToBeContacted</td>
+
+
+                <td colspan="3">
+                    <a class="btn btn-info" asp-action="EditRequest" asp-route-id="@item.Id">Edit Request</a>
+                </td>
+            </tr>
+                }
+            </table>
+        </form>
+    </div>
+
+</div>
