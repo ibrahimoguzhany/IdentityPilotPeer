@@ -19,13 +19,13 @@ namespace IdentityCoreTraining.Models.ViewModels
         [EmailAddress(ErrorMessage = "Email adresiniz dogru formatta degil")]
         public string Email { get; set; }
 
-
         [Required(ErrorMessage = "Telefon Numarasi")]
         [Display(Name = "Telefon Numarasi")]
         public string PhoneNumber { get; set; }
-
         public string PeerNote { get; set; }
         public string UserId { get; set; }
+        public AppUser User { get; set; }
+        public List<DataStatus> StatusList { get; set; }
         public DataStatus Status { get; set; }
         public BaseInformation BaseInformation { get; set; }
         public LanguagePreferency LanguagePreferency { get; set; }

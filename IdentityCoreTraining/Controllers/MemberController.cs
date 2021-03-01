@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace IdentityCoreTraining.Controllers
 {
-   
+   [Authorize]
     public class MemberController : BaseController
     {
         public MemberController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) :base(userManager,signInManager,null)
@@ -28,7 +28,7 @@ namespace IdentityCoreTraining.Controllers
             return View(userViewModel);
         }
 
-        [Authorize]
+        
         public IActionResult EditUser()
         {
             AppUser user = CurrentUser;
@@ -44,7 +44,6 @@ namespace IdentityCoreTraining.Controllers
 
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> EditUser(UserViewModel userViewModel, IFormFile userPicture)
         {
             ModelState.Remove("Password");

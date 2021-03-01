@@ -6,8 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using IdentityCoreTraining.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityCoreTraining.Controllers
@@ -25,10 +29,37 @@ namespace IdentityCoreTraining.Controllers
             return View(requestList);
         }
 
-        public async Task<IActionResult> EditRequest(SupportRequestViewModel supportRequestViewModel, string id)
+        public IActionResult EditRequest(SupportRequestViewModel supportRequestViewModel, string id)
         {
-            ViewBag.peers = await _userManager.GetUsersInRoleAsync("Peer") as List<AppUser>;
+            //ViewBag.peers =  _userManager.GetUsersInRoleAsync("Peer") ;
             supportRequestViewModel.Id = Guid.Parse(id);
+
+            
+            var peerList = _userManager.Users.Select(c => new SelectListItem
+            {
+                Value = c.Id,
+                Text = c.UserName
+            });
+            ViewBag.peerList = peerList;
+
+            supportRequestViewModel.PeerNote =
+                _context.SupportRequests.Where(x => x.UserId == id).Select(x => x.PeerNote).FirstOrDefault();
+
+            var status = (from DataStatus s in Enum.GetValues(typeof(DataStatus))
+                select new SelectListItem
+                {
+                    Value = s.ToString(),
+                    Text = s.ToString()
+                });
+                        
+            //var status = _context.SupportRequests.Select(x => new SelectListItem
+            //{
+            //    Text = x.Status.ToString(),
+
+            //});
+            ViewBag.status = status;
+
+
             return View("EditRequest", supportRequestViewModel);
         }
 
@@ -39,16 +70,18 @@ namespace IdentityCoreTraining.Controllers
             SupportRequest request = await _context.SupportRequests.FindAsync(supportRequestViewModel.Id);
 
             request.PeerNote = supportRequestViewModel.PeerNote;
-            request.User.Id = supportRequestViewModel.UserId;
+            request.UserId = supportRequestViewModel.UserId;
             request.Status = supportRequestViewModel.Status;
 
 
-             _context.SupportRequests.Update(request);
-             _context.SupportRequests.Attach(request);
+            _context.SupportRequests.Attach(request);
+            _context.SupportRequests.Update(request);
+            _context.Entry(request).State = request.UserId == "0" ? EntityState.Added : EntityState.Modified;
 
-            _context.Entry(request).State = EntityState.Modified;
+            //_context.Entry(request).Property(x => x.UserId).IsModified = false;
 
-            int result =await _context.SaveChangesAsync();
+            int result = await _context.SaveChangesAsync();
+            
 
             if (result > 0)
             {

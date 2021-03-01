@@ -29,12 +29,13 @@
 
             <div class="form-group">
                 <label>
-                2.How soon do you want us to make contact with you? This helps us to allocate resources and respond to your level of urgency.
+                    2.How soon do you want us to make contact with you? This helps us to allocate resources and respond to your level of urgency.
                 </label>
                 @foreach (var c in System.Enum.GetValues(typeof(HowSoonWantsToBeContacted)))
                 {
-                    <label asp-for="HowSoonWantsToBeContacted">@c</label>
                     <input type="radio" asp-for="HowSoonWantsToBeContacted" value="@((int)c)" />
+                    <label asp-for="HowSoonWantsToBeContacted">@c</label>
+
                 }
             </div>
 
@@ -42,16 +43,16 @@
                 <label>Language Preferency </label><br />
                 @foreach (var c in System.Enum.GetValues(typeof(LanguagePreferency)))
                 {
-                    <label asp-for="LanguagePreferency">@c</label>
                     <input type="radio" asp-for="LanguagePreferency" value="@((int)c)" />
+                    <label asp-for="LanguagePreferency">@c</label>
                 }
             </div>
             <div class="form-group">
                 <label>Base Information</label><br />
                 @foreach (var c in System.Enum.GetValues(typeof(BaseInformation)))
                 {
-                    <label asp-for="BaseInformation">@c</label>
                     <input type="radio" asp-for="BaseInformation" value="@((int) c)"/>
+                    <label asp-for="BaseInformation">@c</label>
                 }
             </div>
             3.Please enter the phone number and email address that you want us to use to make contacy with you. Only the peer volunteer will see this and it will not be used for any purpose.

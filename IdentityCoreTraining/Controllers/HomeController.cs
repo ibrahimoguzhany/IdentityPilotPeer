@@ -121,7 +121,6 @@ namespace IdentityCoreTraining.Controllers
         {
 
             SupportRequest request = new SupportRequest();
-            
 
             request.BaseInformation = supportRequestViewModel.BaseInformation;
             request.Email = supportRequestViewModel.Email;

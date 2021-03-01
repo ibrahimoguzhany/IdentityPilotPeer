@@ -173,3 +173,4 @@ C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debu
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Peer\_PeerLayout.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Coordinator\_CoordinatorLayout.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Coordinator\EditRequest.cshtml.g.cs
+C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Peer\EditRequest.cshtml.g.cs

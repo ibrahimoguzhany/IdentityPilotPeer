@@ -5,6 +5,7 @@
 }
 
 <h3 class="text-center">Support Requests</h3>
+<hr />
 <div class="row">
     <div>
         <form asp-action="EditRequest" method="post">
@@ -39,7 +40,7 @@
 
 
                 <td colspan="3">
-                    <a class="btn btn-info" asp-action="EditRequest" asp-route-id="@item.Id">Edit Request</a>
+                    <a class="btn btn-info btn-sm" asp-action="EditRequest" asp-route-id="@item.Id">Edit Request</a>
                 </td>
             </tr>
                 }

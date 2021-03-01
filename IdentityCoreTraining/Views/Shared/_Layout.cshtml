@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -22,7 +23,15 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
 
-                  
+                    @if (!this.User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-action="Login" asp-controller="Home">Login <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-action="SignUp" asp-controller="Home">Register <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
 
                     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Peer"))
                     {
@@ -58,16 +67,41 @@
                         </li>
 
                     }
+                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
+                    {
+
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-action="Index" asp-controller="Admin">Admin Page <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="btn btn-info" asp-action="Logout" asp-controller="Member">Çıkış Yap</a>
+                        </li>
+
+                    }
 
                 </ul>
             </div>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        Welcome @this.User.Identity.Name!
-                    </li>
-                </ul>
-            </div>
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            Welcome @this.User.Identity.Name!
+                        </li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            Welcome anonymous user!
+                        </li>
+                    </ul>
+                </div>
+            }
+
         </div>
     </nav>
 
