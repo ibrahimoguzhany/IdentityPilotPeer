@@ -167,10 +167,11 @@ C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debu
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Admin\UpdateRole.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Admin\AssignRole.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Peer\Index.cshtml.g.cs
-C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Home\INeedSupport.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Coordinator\Index.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Peer\RequestPage.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Peer\_PeerLayout.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Coordinator\_CoordinatorLayout.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Coordinator\EditRequest.cshtml.g.cs
 C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Peer\EditRequest.cshtml.g.cs
+C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Shared\_RapidLayout.cshtml.g.cs
+C:\Users\oguzhan\source\repos\IdentityCoreTraining\IdentityCoreTraining\obj\Debug\net5.0\Razor\Views\Home\CreateRequest.cshtml.g.cs

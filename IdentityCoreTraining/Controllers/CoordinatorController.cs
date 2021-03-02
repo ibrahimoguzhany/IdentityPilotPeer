@@ -51,12 +51,7 @@ namespace IdentityCoreTraining.Controllers
                     Value = s.ToString(),
                     Text = s.ToString()
                 });
-                        
-            //var status = _context.SupportRequests.Select(x => new SelectListItem
-            //{
-            //    Text = x.Status.ToString(),
-
-            //});
+            
             ViewBag.status = status;
 
 
@@ -78,7 +73,6 @@ namespace IdentityCoreTraining.Controllers
             _context.SupportRequests.Update(request);
             _context.Entry(request).State = request.UserId == "0" ? EntityState.Added : EntityState.Modified;
 
-            //_context.Entry(request).Property(x => x.UserId).IsModified = false;
 
             int result = await _context.SaveChangesAsync();
             

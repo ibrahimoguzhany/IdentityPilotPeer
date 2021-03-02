@@ -1,23 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_RapidLayout.cshtml";
 }
-<div class="container">
-    <div class="row">
-        <div>
-            <h4 class="text-center">Pilot Peer Support Programme</h4>
+
+<section id="intro" class="clearfix">
+    <div class="container d-flex h-100">
+        <div class="row justify-content-center align-self-center">
+            <div class="col-md-6 intro-info order-md-first order-last">
+                <h2>Peer Pilot<br>Support Programme <span>For Your Journey</span></h2>
+                <div>
+                    <a asp-controller="Home" asp-action="CreateRequest" class="btn-get-started scrollto">I Need Support!</a>
+                    <a asp-controller="Home" asp-action="Login" class="btn-get-started scrollto">Peer / Coordinator Login</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 intro-img order-md-last order-first">
+                <img src="~/Rapid/img/sunexpress-vector-logo.png" alt="" class="img-fluid">
+            </div>
         </div>
-        <div>
-            <img src="~/lib/Pictures/sunexpress.png" />
-        </div>
+
     </div>
-</div>
-
-
-<div class="row">
-    <a class="btn btn-info col-md-6" asp-action="INeedSupport" asp-controller="Home">I need support</a>
-
-    <a class="btn btn-info col-md-6" asp-action="Login" asp-controller="Home">Peer / Coordinator login</a>
-</div>
-
-
+</section><!-- #intro -->

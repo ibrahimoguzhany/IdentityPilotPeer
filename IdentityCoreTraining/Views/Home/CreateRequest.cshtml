@@ -1,0 +1,77 @@
+﻿@model SupportRequestViewModel
+
+@{
+    ViewData["Title"] = "INeedSupport";
+    Layout = "~/Views/Shared/_RapidLayout.cshtml";
+}
+
+@if (ViewBag.success != null)
+{
+    <div>
+        <h3>@ViewBag.success</h3>
+    </div>
+}
+
+<div style="padding: 120px; margin: auto; padding-right: 26%;padding-top: 140px">
+    <div class="container d-flex h-100">
+        <div class="row justify-content-center align-self-center">
+            <div class="col-md-8 intro-info order-md-first order-last">
+                <h3 class="mb-3 font-weight-normal" style="font-family: fo">I would like to talk to a BA Peer</h3>
+                <hr />
+
+                <form asp-action="CreateRequest" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label>1. We need to be able to make contact with you. It does not have to be your real name or full name.</label>
+                        Your Name <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            2.How soon do you want us to make contact with you? This helps us to allocate resources and respond to your level of urgency.
+                        </label>
+                        @foreach (var c in System.Enum.GetValues(typeof(HowSoonWantsToBeContacted)))
+                        {
+                            <input type="radio" asp-for="HowSoonWantsToBeContacted" value="@((int) c)" />
+                            <label asp-for="HowSoonWantsToBeContacted">@c</label>
+
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <label>Language Preferency </label><br />
+                        @foreach (var c in System.Enum.GetValues(typeof(LanguagePreferency)))
+                        {
+                            <input type="radio" asp-for="LanguagePreferency" value="@((int) c)" />
+                            <label asp-for="LanguagePreferency">@c</label>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label>Base Information</label><br />
+                        @foreach (var c in System.Enum.GetValues(typeof(BaseInformation)))
+                        {
+                            <input type="radio" asp-for="BaseInformation" value="@((int) c)" />
+                            <label asp-for="BaseInformation">@c</label>
+                        }
+                    </div>
+                    3.Please enter the phone number and email address that you want us to use to make contacy with you. Only the peer volunteer will see this and it will not be used for any purpose.
+                    <div class="form-group">
+                        Contact Number <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        Contact Email <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="I have read the terms & conditions and want to submit my request" class="btn btn-block btn-dark" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

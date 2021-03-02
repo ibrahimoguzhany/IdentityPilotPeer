@@ -1,33 +1,47 @@
 ﻿@model LoginViewModel
 
 @{
+    Layout = "~/Views/Shared/_RapidLayout.cshtml";
     ViewData["Title"] = "Login";
 }
 
 
-<h4 class="offset-md-4">Giris Sayfasi</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4 offset-md-4">
-        <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="checkbox"  asp-for="RememberMe" /> Beni Hatirla
-            </div>
-            <div class="form-group">
-                <input type="submit" value="GirisYap" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+
+<div id="logreg-forms" class="center">
+    <form class="form-signin" asp-controller="Home" asp-action="Login" method="post">
+        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Giriş</h1>
+        <hr />
+        <div class="social-login">
+            <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Facebook ile oturum aç</span> </button>
+            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Google+ ile oturum aç</span> </button>
+        </div>
+        <p style="text-align:center"> Ya da  </p>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" asp-for="Email">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" asp-for="Password">
+
+        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Giriş Yap</button>
+
+    </form>
 </div>
 
+<p style="text-align:center">
+    <a href="http://bit.ly/2RjWFMfunction toggleResetPswd(e){
+       e.preventDefault();
+       $('#logreg-forms .form-signin').toggle() // display:block or none
+       $('#logreg-forms .form-reset').toggle() // display:block or none
+       }
+       function toggleSignUp(e){
+       e.preventDefault();
+       $('#logreg-forms .form-signin').toggle(); // display:block or none
+       $('#logreg-forms .form-signup').toggle(); // display:block or none
+       }
+       $(()=>
+        {
+        // Login Register Form
+        $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
+        $('#logreg-forms #cancel_reset').click(toggleResetPswd);
+        $('#logreg-forms #btn-signup').click(toggleSignUp);
+        $('#logreg-forms #cancel_signup').click(toggleSignUp);
+        })g" target="_blank" style="color:black">
+    </a>
+</p>

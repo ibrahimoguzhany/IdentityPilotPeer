@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using IdentityCoreTraining.Models.Entities;
 using IdentityCoreTraining.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +24,6 @@ namespace IdentityCoreTraining.Controllers
             userManager, signInManager, context, null)
         {
         }
-
 
         public IActionResult Index()
 
@@ -110,14 +110,13 @@ namespace IdentityCoreTraining.Controllers
 
             return View(userViewModel);
         }
-
-        public IActionResult INeedSupport()
+        public IActionResult CreateRequest()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult INeedSupport(SupportRequestViewModel supportRequestViewModel)
+        public IActionResult CreateRequest(SupportRequestViewModel supportRequestViewModel)
         {
 
             SupportRequest request = new SupportRequest();

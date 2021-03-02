@@ -1,39 +1,40 @@
 ﻿@model SupportRequestViewModel
 @{
-    Layout = "~/Views/Peer/_PeerLayout.cshtml";
+    Layout = "~/Views/Shared/_RapidLayout.cshtml";
 }
 
-<h3>Request Page</h3>
+<div style="padding: 120px; margin: auto;">
+    <h3 class="text-center mb-3 font-weight-normal" style="font-family: fo">Request Page</h3>
+    <hr />
 
 
-<table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered">
 
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Email Address</th>
-        <th>Phone number</th>
-        <th>Peer Note</th>
-        <th>Status</th>
-        <th>Base Information</th>
-        <th>How soon wants to be contacted</th>
-        <th>Language Preferency</th>
-        <th>Peer Id</th>
-    </tr>
-
-    <td>@Model.Id</td>
-        <td>@Model.Name</td>
-        <td>@Model.Email</td>
-        <td>@Model.PhoneNumber</td>
-        <td>@Model.PeerNote</td>
-        <td>@Model.Status</td>
-        <td>@Model.BaseInformation</td>
-        <td>@Model.HowSoonWantsToBeContacted</td>
-        <td>@Model.LanguagePreferency</td>
-        <td>@Model.UserId</td>
- 
-    
-
-
-
-</table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email Address</th>
+            <th>Phone number</th>
+            <th>Peer Note</th>
+            <th>Status</th>
+            <th>Base Information</th>
+            <th>How soon wants to be contacted</th>
+            <th>Language Preferency</th>
+            <th>Peer Id</th>
+            <th>Peer Name</th>
+        </tr>
+        <tr>
+            <td>@Model.Id</td>
+            <td>@Model.Name</td>
+            <td>@Model.Email</td>
+            <td>@Model.PhoneNumber</td>
+            <td>@Model.PeerNote</td>
+            <td>@Model.Status</td>
+            <td>@Model.BaseInformation</td>
+            <td>@Model.HowSoonWantsToBeContacted</td>
+            <td>@Model.LanguagePreferency</td>
+            <td>@Model.UserId</td>
+            <td>@Model.Name</td>
+        </tr>
+    </table>
+    <div>

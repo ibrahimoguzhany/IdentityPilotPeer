@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using IdentityCoreTraining.Models.Context;
 using IdentityCoreTraining.Models.Entities;
+using IdentityCoreTraining.Models.Enums;
 using IdentityCoreTraining.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityCoreTraining.Controllers
@@ -24,21 +26,25 @@ namespace IdentityCoreTraining.Controllers
             AppUser user = CurrentUser;
             List<SupportRequest> requests = _context.SupportRequests.Where(x=>x.UserId == CurrentUser.Id).ToList();
             return View(requests);
-            
-
-
         }
 
         public IActionResult RequestPage(SupportRequestViewModel supportRequestViewModel, string id)
         {
+
             SupportRequest request = _context.SupportRequests.Find(Guid.Parse(id));
 
+            AppUser user = new AppUser();
+            user = _userManager.FindByIdAsync(request.UserId).Result;
+            user.Id = request.UserId;
+
+            supportRequestViewModel.UserId = user.Id;
+            supportRequestViewModel.Name = user.UserName;
             supportRequestViewModel.Id = Guid.Parse(id);
             supportRequestViewModel.Name = request.Name;
             supportRequestViewModel.Email = request.Email;
             supportRequestViewModel.PhoneNumber = request.PhoneNumber;
             supportRequestViewModel.PeerNote = request.PeerNote;
-            supportRequestViewModel.UserId = request.UserId;
+
             return View("RequestPage", supportRequestViewModel);
         }
 
@@ -50,6 +56,13 @@ namespace IdentityCoreTraining.Controllers
             supportRequestViewModel.PeerNote = request.PeerNote;
             supportRequestViewModel.Id = Guid.Parse(id);
 
+            ViewBag.status = (from DataStatus s in Enum.GetValues(typeof(DataStatus))
+                select new SelectListItem
+                {
+                    Value = s.ToString(),
+                    Text = s.ToString()
+                });
+            
             return View(supportRequestViewModel);
         }
 
@@ -58,6 +71,7 @@ namespace IdentityCoreTraining.Controllers
         {
             SupportRequest request = await _context.SupportRequests.Where(x=>x.Id == Guid.Parse(id)).FirstOrDefaultAsync();
             request.PeerNote = supportRequestViewModel.PeerNote;
+            request.Status = supportRequestViewModel.Status;
 
 
             _context.SupportRequests.Attach(request);
@@ -73,8 +87,5 @@ namespace IdentityCoreTraining.Controllers
 
             return View(supportRequestViewModel);
         }
-
-
-
     }
 }
