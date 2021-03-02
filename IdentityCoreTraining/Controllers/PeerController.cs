@@ -21,9 +21,12 @@ namespace IdentityCoreTraining.Controllers
 
         public IActionResult Index()
         {
-            List<SupportRequest> requests = _context.SupportRequests.ToList();
-            
+            AppUser user = CurrentUser;
+            List<SupportRequest> requests = _context.SupportRequests.Where(x=>x.UserId == CurrentUser.Id).ToList();
             return View(requests);
+            
+
+
         }
 
         public IActionResult RequestPage(SupportRequestViewModel supportRequestViewModel, string id)
