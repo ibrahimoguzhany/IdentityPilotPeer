@@ -1,0 +1,50 @@
+﻿@model List<SupportRequest>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_RapidLayout.cshtml";
+}
+
+
+<div class="container" style="padding-top: 150px; margin-left: 4%;">
+    <h3 class="text-center mb-3 font-weight-normal" style="font-family: fo;padding-left: 20%">Support Requests</h3>
+    <hr />
+
+        <form asp-action="EditRequest" method="post">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Request Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Peer Note</th>
+                    <th>Assigned Peer</th>
+                    <th>Status</th>
+                    <th>Base Information</th>
+                    <th>Language Preferency</th>
+                    <th>How Soon Wants to Be Contacted</th>
+                    <th>İşlemler</th>
+
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.PeerNote</td>
+                        <td>@item.Name</td>
+                        <td>@item.Status</td>
+                        <td>@item.BaseInformation</td>
+                        <td>@item.LanguagePreferency</td>
+                        <td>@item.HowSoonWantsToBeContacted</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" asp-action="EditRequest" asp-route-id="@item.Id">Edit Request</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </form>
+    </div>
+
+</div>

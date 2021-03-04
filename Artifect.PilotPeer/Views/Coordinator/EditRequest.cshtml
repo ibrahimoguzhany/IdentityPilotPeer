@@ -1,0 +1,38 @@
+﻿@model SupportRequestViewModel
+
+@{
+    ViewData["Title"] = "EditRequest";
+    Layout = "~/Views/Shared/_RapidLayout.cshtml";
+}
+
+<div style="padding: 150px">
+    <h3 class="text-center mb-3 font-weight-normal" style="font-family: fo">Request Atama / Guncelleme Ekrani</h3>
+    <hr />
+    <div class="container">
+        <div style="margin: auto; width: 60%;padding: 10px">
+            <form asp-action="EditRequest" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="PeerNote" class="control-label"></label>
+                    <input asp-for="PeerNote" class="form-control" />
+                    <span asp-validation-for="PeerNote" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Choose a Peer for this Request</label>
+                    <select class="form-control" asp-for="UserId" asp-items="@((IEnumerable<SelectListItem>)ViewBag.peerList)">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Status</label>
+                    <select class="form-control" asp-for="Status" asp-items="@((IEnumerable<SelectListItem>)ViewBag.status)">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Kaydet" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

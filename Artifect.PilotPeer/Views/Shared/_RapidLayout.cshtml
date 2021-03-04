@@ -1,0 +1,192 @@
+﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/LoginSignUp/style.css">
+    <link rel="stylesheet" href="~/LoginSignUp/style.css">
+
+    <!-- Favicons -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href="~/Rapid/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link href="~/Rapid/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Rapid/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/Rapid/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="~/Rapid/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Rapid/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Main Stylesheet File -->
+    <link href="~/Rapid/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <header id="header">
+        <div id="topbar">
+            <div class="container">
+                <div class="social-links">
+                    <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="https://www.linkedin.com/company/arfitect/" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                    <a href="http://arfitect.com/" class="instagram"><i class="fa fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="logo float-left">
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <h1 class="text-light"><a href="#intro" class="scrollto"><span>PilotPeerSupport</span></a></h1>
+                <!-- <a href="#header" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a> -->
+            </div>
+
+            <nav class="main-nav float-right d-none d-lg-block">
+                <ul>
+                    <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    @if (this.User.IsInRole("Peer"))
+                    {
+                        <li><a asp-controller="Peer" asp-action="Index">Peer Page</a></li>
+                    }
+                    @if (this.User.IsInRole("Coordinator"))
+                    {
+                        <li><a asp-controller="Coordinator" asp-action="Index">Coordinator Page</a></li>
+                    }
+                    @if (this.User.IsInRole("Member"))
+                    {
+                        <li><a asp-controller="Member" asp-action="Index">Member Page</a></li>
+                    }
+                    
+                    <li class="drop-down">
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <a href="">@this.User.Identity.Name</a>
+                        }
+                        @if (!this.User.Identity.IsAuthenticated)
+                        {
+                            <a href="">Anonymous User</a>
+                        }
+                        <ul>
+                            @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Peer"))
+                            {
+                                <li class="drop-down">
+                                    <a href="#">Profilim</a>
+                                    <ul>
+                                        <li><a asp-controller="Member" asp-action="Index">Profilim</a></li>
+                                        <li><a asp-controller="Member" asp-action="EditUser">Profili Güncelle</a></li>
+                                    </ul>
+                                </li>
+                                <li><a asp-controller="Member" asp-action="Logout">Logout</a></li>
+                            }
+                            @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
+                            {
+                                <li class="drop-down">
+                                    <a href="#">Profilim</a>
+                                    <ul>
+                                        <li><a asp-controller="Member" asp-action="Index">Profilim</a></li>
+                                        <li><a asp-controller="Member" asp-action="EditUser">Profili Güncelle</a></li>
+                                    </ul>
+                                </li>
+                                <li><a asp-controller="Member" asp-action="Logout">Logout</a></li>
+                            }
+                            @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Coordinator"))
+                            {
+                                <li class="drop-down">
+                                    <a href="#">Profilim</a>
+                                    <ul>
+                                        <li><a asp-controller="Member" asp-action="Index">Profilim</a></li>
+                                        <li><a asp-controller="Member" asp-action="EditUser">Profili Güncelle</a></li>
+                                    </ul>
+                                </li>
+                                <li><a asp-controller="Member" asp-action="Logout">Logout</a></li>
+                            }
+                            @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Member"))
+                            {
+                                <li class="drop-down">
+                                    <a href="#">Profilim</a>
+                                    <ul>
+                                        <li><a asp-controller="Member" asp-action="Index">Profil</a></li>
+                                        <li><a asp-controller="Member" asp-action="EditUser">Profili Güncelle</a></li>
+                                    </ul>
+                                </li>
+                                <li><a asp-controller="Member" asp-action="Logout">Logout</a></li>
+                            }
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
+                                <li class="drop-down">
+                                    <a href="#">Profilim</a>
+                                    <ul>
+                                        <li><a asp-controller="Member" asp-action="Index">Profil</a></li>
+                                        <li><a asp-controller="Member" asp-action="EditUser">Profili Güncelle</a></li>
+                                    </ul>
+                                </li>
+                                <li><a asp-controller="Member" asp-action="Logout">Logout</a></li>
+                            }
+                            @if (!this.User.Identity.IsAuthenticated)
+                            {
+                                <li><a asp-controller="Home" asp-action="Login">Sign In</a></li>
+                                <li><a asp-controller="Home" asp-action="SignUp">Sign Up</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li><a href="#footer">Contact Us</a></li>
+                </ul>
+            </nav><!-- .main-nav -->
+
+        </div>
+    </header><!-- #header -->
+    <!--==========================
+    Intro Section
+    ============================-->
+
+
+    <main id="main">
+        @RenderBody()
+    </main>
+
+
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- Uncomment below i you want to use a preloader -->
+    <!-- <div id="preloader"></div> -->
+    <!-- JavaScript Libraries -->
+    <script src="~/Rapid/lib/jquery/jquery.min.js"></script>
+    <script src="~/Rapid/lib/jquery/jquery-migrate.min.js"></script>
+    <script src="~/Rapid/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Rapid/lib/easing/easing.min.js"></script>
+    <script src="~/Rapid/lib/mobile-nav/mobile-nav.js"></script>
+    <script src="~/Rapid/lib/wow/wow.min.js"></script>
+    <script src="~/Rapid/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/Rapid/lib/counterup/counterup.min.js"></script>
+    <script src="~/Rapid/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/Rapid/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Rapid/lib/lightbox/js/lightbox.min.js"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="~/Rapid/contactform/contactform.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="~/LoginSignUp/script.js"></script>
+
+
+
+    <!-- Template Main Javascript File -->
+    <script src="~/Rapid/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿@model List<SupportRequest>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_RapidLayout.cshtml";
+}
+
+
+<div style="padding: 120px;margin: auto">
+    <h3 class="text-center mb-3 font-weight-normal" style="font-family: fo">Support Requests</h3>
+    <hr />
+    <div>
+        <form asp-action="RequestPage" method="post">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Request Id</th>
+                    <th>Sender Name</th>
+                    <th>Status</th>
+                    <th>İşlemler</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    @if (item.Status == DataStatus.AssignedToPeer || item.Status == DataStatus.Closed)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Status</td>
+                            @if (item.Status == DataStatus.AssignedToPeer)
+                            {
+                                <td>
+                                    <a class="btn btn-info btn-sm" asp-action="RequestPage" asp-route-id="@item.Id">
+                                        Go To Request
+                                    </a>
+                                    <a class="btn btn-sm btn-primary" asp-action="EditRequest" asp-controller="Peer" asp-route-id="@item.Id">
+                                        Add Your Peer Note
+                                    </a>
+                                </td>
+                            }
+
+                            @if (item.Status == DataStatus.Closed)
+                            {
+                                <td>
+                                    <a class="btn btn-info btn-sm" asp-action="RequestPage" asp-route-id="@item.Id">
+                                        Go To Request
+                                    </a>
+                                </td>
+                            }
+                        </tr>
+                    }
+                }
+            </table>
+        </form>
+    </div>
+</div>
