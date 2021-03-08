@@ -34,7 +34,7 @@ using Arfitect.Training.PilotPeer.Models.Enums;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a1ed3bf0bf6b83fd8904cf895f74f394deabc704", @"/Views/Admin/UpdateRole.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ae075587ae073657951fdc96c80769e69cf2cd5b", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"50976b95502c41b2057d72b25b496f84e1a431e4", @"/Views/_ViewImports.cshtml")]
     public class Views_Admin_UpdateRole : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Arfitect.Training.PilotPeer.Models.ViewModels.RoleViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("text-danger"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);

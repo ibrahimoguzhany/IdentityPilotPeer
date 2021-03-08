@@ -8,6 +8,5 @@ namespace Arfitect.Training.PilotPeer.Models.Entities
 {
     public class AppRole:IdentityRole
     {
-
     }
 }

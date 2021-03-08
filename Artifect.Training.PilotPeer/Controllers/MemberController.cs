@@ -13,10 +13,10 @@ using Arfitect.Training.PilotPeer.Models.ViewModels;
 
 namespace Arfitect.Training.PilotPeer.Controllers
 {
-   [Authorize]
+    [Authorize]
     public class MemberController : BaseController
     {
-        public MemberController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) :base(userManager,signInManager,null)
+        public MemberController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : base(userManager, signInManager, null)
         {
         }
 
@@ -28,7 +28,7 @@ namespace Arfitect.Training.PilotPeer.Controllers
             return View(userViewModel);
         }
 
-        
+
         public IActionResult EditUser()
         {
             AppUser user = CurrentUser;
@@ -79,13 +79,13 @@ namespace Arfitect.Training.PilotPeer.Controllers
                 {
                     await _userManager.UpdateSecurityStampAsync(user);
                     await _signInManager.SignOutAsync();
-                    await _signInManager.SignInAsync(user,true);
+                    await _signInManager.SignInAsync(user, true);
 
                     ViewBag.success = "true";
                 }
                 else
                 {
-                   AddModelError(result);
+                    AddModelError(result);
                 }
             }
             return View(userViewModel);
@@ -114,7 +114,7 @@ namespace Arfitect.Training.PilotPeer.Controllers
                     {
                         _userManager.UpdateSecurityStampAsync(user);
                         _signInManager.SignOutAsync();
-                        _signInManager.PasswordSignInAsync(user,changePasswordViewModel.NewPassword,true,false);
+                        _signInManager.PasswordSignInAsync(user, changePasswordViewModel.NewPassword, true, false);
 
                         ViewBag.success = "true";
                     }

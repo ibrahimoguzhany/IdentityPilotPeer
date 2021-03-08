@@ -183,3 +183,5 @@ C:\Users\oguzhan\source\repos\Artifect.Training.PilotPeer\Artifect.Training.Pilo
 C:\Users\oguzhan\source\repos\Artifect.Training.PilotPeer\Artifect.Training.PilotPeer\obj\Debug\net5.0\ref\Arfitect.Training.PilotPeer.dll
 C:\Users\oguzhan\source\repos\Artifect.Training.PilotPeer\Artifect.Training.PilotPeer\obj\Debug\net5.0\Arfitect.Training.PilotPeer.pdb
 C:\Users\oguzhan\source\repos\Artifect.Training.PilotPeer\Artifect.Training.PilotPeer\obj\Debug\net5.0\Arfitect.Training.PilotPeer.genruntimeconfig.cache
+C:\Users\oguzhan\source\repos\Artifect.Training.PilotPeer\Artifect.Training.PilotPeer\obj\Debug\net5.0\Razor\Views\Home\ResetPassword.cshtml.g.cs
+C:\Users\oguzhan\source\repos\Artifect.Training.PilotPeer\Artifect.Training.PilotPeer\obj\Debug\net5.0\Razor\Views\Home\ResetPasswordConfirm.cshtml.g.cs

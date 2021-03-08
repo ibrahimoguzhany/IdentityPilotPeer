@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using Arfitect.Training.PilotPeer.Models.Enums;
+using Microsoft.AspNetCore.Identity;
 
 namespace Arfitect.Training.PilotPeer.Models.Entities
 {
@@ -12,9 +13,11 @@ namespace Arfitect.Training.PilotPeer.Models.Entities
         public SupportRequest()
         {
             Id = new Guid();
+            
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string? PeerName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string PeerNote { get; set; }
@@ -24,6 +27,7 @@ namespace Arfitect.Training.PilotPeer.Models.Entities
 
         public DataStatus Status { get; set; }
         public string UserId { get; set; }
+
         public AppUser User { get; set; }
     }
 }

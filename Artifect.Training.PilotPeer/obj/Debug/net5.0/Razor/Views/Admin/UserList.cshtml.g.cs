@@ -34,7 +34,7 @@ using Arfitect.Training.PilotPeer.Models.Enums;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"597d7a7a3d765d36e2db3c00bebd4f23e2914f62", @"/Views/Admin/UserList.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ae075587ae073657951fdc96c80769e69cf2cd5b", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"50976b95502c41b2057d72b25b496f84e1a431e4", @"/Views/_ViewImports.cshtml")]
     public class Views_Admin_UserList : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<AppUser>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-success"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -59,6 +59,7 @@ using Arfitect.Training.PilotPeer.Models.Enums;
                 return __backed__tagHelperScopeManager;
             }
         }
+        private global::Arfitect.Training.PilotPeer.CustomTools.CustomTagHelpers.UserRolesName __Arfitect_Training_PilotPeer_CustomTools_CustomTagHelpers_UserRolesName;
         private global::Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper __Microsoft_AspNetCore_Mvc_TagHelpers_AnchorTagHelper;
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
@@ -125,18 +126,32 @@ using Arfitect.Training.PilotPeer.Models.Enums;
 #line default
 #line hidden
 #nullable disable
-            WriteLiteral("</td>\r\n                <td");
-            BeginWriteAttribute("user-roles", " user-roles=\"", 697, "\"", 718, 1);
+            WriteLiteral("</td>\r\n                ");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("td", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "597d7a7a3d765d36e2db3c00bebd4f23e2914f626658", async() => {
+            }
+            );
+            __Arfitect_Training_PilotPeer_CustomTools_CustomTagHelpers_UserRolesName = CreateTagHelper<global::Arfitect.Training.PilotPeer.CustomTools.CustomTagHelpers.UserRolesName>();
+            __tagHelperExecutionContext.Add(__Arfitect_Training_PilotPeer_CustomTools_CustomTagHelpers_UserRolesName);
+            BeginWriteTagHelperAttribute();
 #nullable restore
 #line 34 "C:\Users\oguzhan\source\repos\Artifect.Training.PilotPeer\Artifect.Training.PilotPeer\Views\Admin\UserList.cshtml"
-WriteAttributeValue("", 710, user.Id, 710, 8, false);
+                    WriteLiteral(user.Id);
 
 #line default
 #line hidden
 #nullable disable
-            EndWriteAttribute();
-            WriteLiteral("></td>\r\n                <td>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "597d7a7a3d765d36e2db3c00bebd4f23e2914f626921", async() => {
+            __tagHelperStringValueBuffer = EndWriteTagHelperAttribute();
+            __Arfitect_Training_PilotPeer_CustomTools_CustomTagHelpers_UserRolesName.UserId = __tagHelperStringValueBuffer;
+            __tagHelperExecutionContext.AddTagHelperAttribute("user-roles", __Arfitect_Training_PilotPeer_CustomTools_CustomTagHelpers_UserRolesName.UserId, global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+            await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            if (!__tagHelperExecutionContext.Output.IsContentModified)
+            {
+                await __tagHelperExecutionContext.SetOutputContentAsync();
+            }
+            Write(__tagHelperExecutionContext.Output);
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            WriteLiteral("\r\n                <td>");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "597d7a7a3d765d36e2db3c00bebd4f23e2914f628374", async() => {
                 WriteLiteral("Rol ata");
             }
             );

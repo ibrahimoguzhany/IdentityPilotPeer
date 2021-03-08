@@ -7,7 +7,7 @@ using Arfitect.Training.PilotPeer.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace Arfitect.Training.PilotPeer.CustomTagHelpers
+namespace Arfitect.Training.PilotPeer.CustomTools.CustomTagHelpers
 {
 
     [HtmlTargetElement("td", Attributes = "user-roles")]

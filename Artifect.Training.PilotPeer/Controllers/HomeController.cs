@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+﻿using Arfitect.Training.PilotPeer.CustomTools.CustomMailSenders;
 using Arfitect.Training.PilotPeer.Models.Context;
 using Arfitect.Training.PilotPeer.Models.Entities;
 using Arfitect.Training.PilotPeer.Models.ViewModels;
-using Arfitect.Training.PilotPeer.Models.Enums;
-using Mapster;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Arfitect.Training.PilotPeer.Controllers
@@ -22,11 +15,11 @@ namespace Arfitect.Training.PilotPeer.Controllers
     {
         public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RequestContext context) : base(
             userManager, signInManager, context, null)
-        { 
+        {
         }
 
         public IActionResult Index()
-        { 
+        {
             return View();
         }
 
@@ -53,16 +46,16 @@ namespace Arfitect.Training.PilotPeer.Controllers
                     {
                         if (TempData["ReturnUrl"] != null)
                             return Redirect(TempData["ReturnUrl"].ToString());
-                        
+
                         if (await _userManager.IsInRoleAsync(user, "Admin"))
                             return RedirectToAction("Index", "Admin");
 
                         else if (await _userManager.IsInRoleAsync(user, "Peer"))
-                            return RedirectToAction("Index" ,"Peer");
-                        
+                            return RedirectToAction("Index", "Peer");
+
                         else if (await _userManager.IsInRoleAsync(user, "Coordinator"))
                             return RedirectToAction("Index", "Coordinator");
-                        
+
                         else if (await _userManager.IsInRoleAsync(user, "Member"))
                             return RedirectToAction("Index", "Member");
                         else
@@ -112,7 +105,6 @@ namespace Arfitect.Training.PilotPeer.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult CreateRequest(SupportRequestViewModel supportRequestViewModel)
         {
@@ -140,6 +132,82 @@ namespace Arfitect.Training.PilotPeer.Controllers
             }
             return View(supportRequestViewModel);
 
+        }
+
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(PasswordResetViewModel passwordResetViewModel)
+        {
+            AppUser user = _userManager.FindByEmailAsync(passwordResetViewModel.Email).Result;
+
+            if (user != null)
+            {
+                string passwordResetToken = _userManager.GeneratePasswordResetTokenAsync(user).Result;
+                string passwordResetLink = Url.Action("ResetPasswordConfirm", "Home", new
+                {
+                    userId = user.Id,
+                    token = passwordResetToken,
+
+                }, HttpContext.Request.Scheme);
+                //www.dasdsa.com/HOme/ResetPasswordConfirm?userId=dasdsadadas&token=dasdasdas
+                CustomPasswordResetMailSender.PasswordResetMailSender(passwordResetLink,user.Email);
+
+                ViewBag.status = "success";
+            }
+            else
+            {
+                ModelState.AddModelError("", "Sistemde kayitli bir email adresi bulunamamistir.");
+            }
+            return View(passwordResetViewModel);
+        }
+
+        public IActionResult ResetPasswordConfirm(string userId, string token)
+        {
+            TempData["userId"] = userId;
+            TempData["token"] = token;
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPasswordConfirm([Bind("NewPassword")] PasswordResetViewModel passwordResetViewModel)
+        {
+            string token = TempData["userId"].ToString();
+            string userId = TempData["userId"].ToString();
+
+            AppUser user = await _userManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+                IdentityResult result =
+                    await _userManager.ResetPasswordAsync(user, token, passwordResetViewModel.NewPassword);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.UpdateSecurityStampAsync(user);
+
+                    TempData["passwordResetInfo"] =
+                        "Şifreniz başarıyla yenilenmiştir. Yeni şifreniz ile giriş yapabilirsiniz";
+                    ViewBag.status = "success";
+
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError("",item.Description);
+                    }
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("","Bir hata meydana gelmistir. Lutfen daha sonra tekrar deneyiniz.");
+            }
+
+            return View(passwordResetViewModel);
         }
     }
 }

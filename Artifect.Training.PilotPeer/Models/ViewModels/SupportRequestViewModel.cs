@@ -23,9 +23,9 @@ namespace Arfitect.Training.PilotPeer.Models.ViewModels
         [Display(Name = "Telefon Numarasi")]
         public string PhoneNumber { get; set; }
         public string PeerNote { get; set; }
+        public string? PeerName { get; set; }
         public string UserId { get; set; }
         public AppUser User { get; set; }
-        public List<DataStatus> StatusList { get; set; }
         public DataStatus Status { get; set; }
         public BaseInformation BaseInformation { get; set; }
         public LanguagePreferency LanguagePreferency { get; set; }

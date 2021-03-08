@@ -1,12 +1,14 @@
+﻿using Arfitect.Training.PilotPeer.Models.Context;
+using Arfitect.Training.PilotPeer.Models.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Arfitect.Training.PilotPeer.Models.Context;
-using Arfitect.Training.PilotPeer.Models.Entities;
+using Arfitect.Training.PilotPeer.CustomTools.CustomValidation;
 
 namespace Arfitect.Training.PilotPeer
 {
@@ -32,6 +34,8 @@ namespace Arfitect.Training.PilotPeer
             services.AddDbContext<RequestContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
+          
+
 
             CookieBuilder cookieBuilder = new CookieBuilder();
 
@@ -46,21 +50,22 @@ namespace Arfitect.Training.PilotPeer
                 options.LogoutPath = new PathString("/Member/Logout");
                 options.Cookie = cookieBuilder;
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
-                options.SlidingExpiration = true; 
+                options.SlidingExpiration = true;
                 options.AccessDeniedPath = new PathString("/Member/AccessDenied");// sayfaya erisim izni olmayan kullanicilarin gidecegi path
             });
 
-
-
             services.AddIdentity<AppUser, AppRole>(options =>
             {
+                options.User.RequireUniqueEmail = true;
+                options.User.AllowedUserNameCharacters =
+                    "abcçdefgğhıijklmnopqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOPQRSŞTUÜVWXYZ0123456789-._ ";
+
                 options.Password.RequiredLength = 3;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
-
-            }).AddEntityFrameworkStores<AppIdentityDbContext>();
+            }).AddPasswordValidator<CustomPasswordValidator>().AddUserValidator<CustomUserValidator>().AddErrorDescriber<CustomIdentityErrorDescriber>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
 
         }
 

@@ -13,11 +13,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Arfitect.Training.PilotPeer.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class AdminController : BaseController
     {
 
-        public AdminController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager) : base(userManager, null, null,roleManager)
+        public AdminController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager) : base(userManager, null, null, roleManager)
         {
         }
 

@@ -22,7 +22,8 @@
                 <form asp-action="CreateRequest" method="post">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                 
+                    <input asp-for="User.Id" type="hidden"/>
                     <div class="form-group">
                         <label>1. We need to be able to make contact with you. It does not have to be your real name or full name.</label>
                         Your Name <input asp-for="Name" class="form-control" />

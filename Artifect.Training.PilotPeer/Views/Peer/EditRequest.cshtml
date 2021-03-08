@@ -5,16 +5,16 @@
     Layout = "~/Views/Shared/_RapidLayout.cshtml";
 }
 
-<h1>EditRequest</h1>
-
-<h4>SupportRequestViewModel</h4>
+<div style="padding: 120px; margin: auto;">
+<h3 class="mb-3 font-weight-normal" style="font-family: fo">Edit Request</h3>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditRequest" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
-            <input type="hidden" asp-for="@Model.UserId" />
+            <input type="hidden" asp-for="@Model.User.Id" />
             <div class="form-group">
                 <label asp-for="PeerNote" class="control-label"></label>
                 <input asp-for="PeerNote" class="form-control" />
@@ -32,9 +32,5 @@
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
